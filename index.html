@@ -56,7 +56,7 @@ addEventListener("load",function(){setTimeout(function(){if(!r.classList.contain
     <div class="hero-grid">
       <div class="hero-copy">
         <h1 id="hero-title"><span class="ln"><span>Borrow $500</span></span><span class="ln"><span>for just $1.*</span></span></h1>
-        <p class="lede">Pay it off within 14 days and $1 is your total cost to borrow. No payday fees, no hard credit check.</p>
+        <p class="lede"><span class="lede-full">Pay it off within 14 days and $1 is your total cost to borrow. No payday fees, no hard credit check.</span><span class="lede-short">Pay it off within 14 days. No payday fees.</span></p>
 
         <div class="ledger" role="group" aria-label="Example: $500 paid off within 14 days">
           <div class="cell"><span class="k">Amount borrowed</span><span class="v" data-count="500">$500.00</span></div>
@@ -67,11 +67,11 @@ addEventListener("load",function(){setTimeout(function(){if(!r.classList.contain
 
         <div class="paths" id="hero-paths">
           <p class="paths-q">Have you already applied with GoLoans?</p>
-          <div class="path">
-            <div class="path-head">
+          <div class="path path--ibv">
+            <a class="path-head" href="https://onyx.goloans.ca/clients/inverite/add/" data-cta="ibv" data-loc="hero-card" tabindex="-1" aria-hidden="true">
               <span class="path-icon path-icon--ibv"><svg aria-hidden="true"><use href="#i-bank"/></svg></span>
               <span><strong>I already applied</strong><small>Verify your bank to finish</small></span>
-            </div>
+            </a>
             <a class="go go--orange" data-cta="ibv" data-loc="hero" href="https://onyx.goloans.ca/clients/inverite/add/">
               <span class="go-in">
                 <svg class="go-icon" aria-hidden="true"><use href="#i-bank"/></svg>
@@ -79,11 +79,11 @@ addEventListener("load",function(){setTimeout(function(){if(!r.classList.contain
               </span>
             </a>
           </div>
-          <div class="path">
-            <div class="path-head">
+          <div class="path path--new">
+            <a class="path-head" href="https://onyx.goloans.ca/clients/application/express/" data-cta="express" data-loc="hero-card" tabindex="-1" aria-hidden="true">
               <span class="path-icon path-icon--new"><svg aria-hidden="true"><use href="#i-form"/></svg></span>
               <span><strong>I’m new to GoLoans</strong><small>Express form, about 2 minutes</small></span>
-            </div>
+            </a>
             <a class="go go--white" data-cta="express" data-loc="hero" href="https://onyx.goloans.ca/clients/application/express/">
               <span class="go-in">
                 <svg class="go-icon" aria-hidden="true"><use href="#i-form"/></svg>
@@ -103,6 +103,7 @@ addEventListener("load",function(){setTimeout(function(){if(!r.classList.contain
             <img src="img/relief-4x3.webp" width="1440" height="1080" alt="A woman smiling with relief as she checks her phone at her kitchen table" fetchpriority="high" decoding="async">
           </picture>
         </div>
+        <p class="photo-tag"><span class="photo-tag-in"><span class="photo-tag-k">Total cost<br>in 14 days*</span><span class="photo-tag-v">$1.00</span></span></p>
       </div>
     </div>
   </div>
