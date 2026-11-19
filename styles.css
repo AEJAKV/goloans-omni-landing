@@ -386,7 +386,18 @@ h1,h2,h3,p,ol,ul,dl,dd{margin:0}
 /* one shine across the primary button */
 .paths .go--orange{position:relative;overflow:hidden}
 .paths .go--orange::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);pointer-events:none;opacity:0}
-.anim .paths .go--orange.shine::after{opacity:1;left:130%;transition:left .9s ease-in-out,opacity .2s}
+.anim .paths .go--orange.cta-live::after{opacity:1;animation:cta-shine 7s ease-in-out infinite}
+.anim .paths .go--orange.cta-pulse{animation:cta-pulse 2.4s ease-out 3}
+@media (hover:hover){
+  .anim .paths .go--orange:hover::after{animation:none;opacity:0}
+  .anim .paths .go--orange.cta-pulse:hover{animation:none}
+}
+@keyframes cta-shine{0%{left:-60%}13%{left:130%}100%{left:130%}}
+@keyframes cta-pulse{
+  0%{box-shadow:0 5px 0 var(--orange-edge),0 0 0 0 rgba(244,122,31,.6)}
+  70%{box-shadow:0 5px 0 var(--orange-edge),0 0 0 14px rgba(244,122,31,0)}
+  100%{box-shadow:0 5px 0 var(--orange-edge),0 0 0 0 rgba(244,122,31,0)}
+}
 
 /* ---------- Scroll: comparison bars ---------- */
 .anim .bar-fill{scale:0 1;transform-origin:left center}

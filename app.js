@@ -97,6 +97,10 @@
   /* ---------- Motion (only when html.anim is set: visitor allows motion) ---------- */
   var root = document.documentElement;
   if (root.classList.contains("anim")) {
+    var ctaReady = false, ctaVisible = true;
+    var syncShine = function () {
+      if (shineBtn) shineBtn.classList.toggle("cta-live", ctaReady && ctaVisible);
+    };
     var counters = document.querySelectorAll(".ledger [data-count]");
     var stamp = document.querySelector(".v-stamp");
     var total = stamp && stamp.closest(".cell--total");
@@ -122,7 +126,14 @@
         if (stamp) stamp.classList.add("is-stamped");
         if (total) { total.classList.add("flash"); setTimeout(function () { total.classList.remove("flash"); }, 400); }
       }, 1200);
-      setTimeout(function () { if (shineBtn) shineBtn.classList.add("shine"); }, 1700);
+      setTimeout(function () {
+        if (!shineBtn) return;
+        shineBtn.classList.add("cta-pulse");          // 3 pulses, then stops (CSS)
+        shineBtn.addEventListener("animationend", function (e) {
+          if (e.target === shineBtn) shineBtn.classList.remove("cta-pulse");
+        });
+        ctaReady = true; syncShine();                 // shine every 7s while on screen
+      }, 1700);
     };
 
     // Wait until PageSense has revealed the page (it hides <body> while it loads), then play once.
@@ -135,6 +146,11 @@
     };
     tryStart();
     setTimeout(function () { if (!started) { started = true; playHero(); } }, 11000);
+
+    // Shine only runs while the hero buttons are on screen.
+    if (shineBtn && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (e) { ctaVisible = e[0].isIntersecting; syncShine(); }).observe(shineBtn);
+    }
 
     // Scroll-triggered: comparison bars and closing headline, once each.
     var once = document.querySelectorAll(".bars-card, .close");
