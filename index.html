@@ -12,6 +12,9 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="img/relief-4x3.webp">
 <meta name="theme-color" content="#052611">
+<script>(function(r){if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;r.classList.add("anim");
+/* failsafe: if app.js never runs, show everything */
+addEventListener("load",function(){setTimeout(function(){if(!r.classList.contains("hero-in"))r.classList.add("hero-in","fallback")},1500)})})(document.documentElement);</script>
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="apple-touch-icon" href="img/favicon.png">
 <!-- Google Tag Manager (goloans.ca container) -->
@@ -52,13 +55,13 @@
 
     <div class="hero-grid">
       <div class="hero-copy">
-        <h1 id="hero-title">Borrow $500<br>for just $1.*</h1>
+        <h1 id="hero-title"><span class="ln"><span>Borrow $500</span></span><span class="ln"><span>for just $1.*</span></span></h1>
         <p class="lede">Pay it off within 14 days and $1 is your total cost to borrow. No payday fees, no hard credit check.</p>
 
         <div class="ledger" role="group" aria-label="Example: $500 paid off within 14 days">
-          <div class="cell"><span class="k">Amount borrowed</span><span class="v">$500.00</span></div>
-          <div class="cell"><span class="k">Repaid within 14 days</span><span class="v">$500.00</span></div>
-          <div class="cell cell--total"><span class="k">Total cost to borrow</span><span class="v">$1.00</span></div>
+          <div class="cell"><span class="k">Amount borrowed</span><span class="v" data-count="500">$500.00</span></div>
+          <div class="cell"><span class="k">Repaid within 14 days</span><span class="v" data-count="500">$500.00</span></div>
+          <div class="cell cell--total"><span class="k">Total cost to borrow</span><span class="v v-stamp">$1.00</span></div>
         </div>
         <p class="ledger-note">Example: $500 paid off within 14 days. A typical payday loan on the same $500 can cost up to <strong><span data-payday>$70</span></strong>.</p>
 
@@ -281,7 +284,7 @@
 <!-- ============ CLOSING ============ -->
 <section class="close" aria-labelledby="close-title">
   <div class="wrap close-wrap">
-    <h2 class="close-line" id="close-title">Need extra cash?<br>14 days. $1.</h2>
+    <h2 class="close-line" id="close-title"><span class="ln"><span>Need extra cash?</span></span><span class="ln"><span>14 days. $1.</span></span></h2>
     <p class="close-sub">Why pay more? Pick your next step.</p>
     <div class="answer-ctas" id="close-ctas">
       <a class="go go--orange" data-cta="ibv" data-loc="closing" href="https://onyx.goloans.ca/clients/inverite/add/"><span class="go-in"><svg class="go-icon" aria-hidden="true"><use href="#i-bank"/></svg><span class="go-txt">Already applied? Verify my bank</span></span></a>

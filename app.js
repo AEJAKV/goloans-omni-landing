@@ -61,6 +61,7 @@
       keys.forEach(function (k) { k.setAttribute("aria-pressed", k === b ? "true" : "false"); });
       txt.innerHTML = answers[b.getAttribute("data-pay")];
       box.hidden = false;
+      box.classList.remove("show"); void box.offsetWidth; box.classList.add("show");
       track("payday_check", { answer: b.textContent.trim() });
     });
   });
@@ -91,5 +92,61 @@
     new IntersectionObserver(function (e) {
       closeVisible = e[0].isIntersecting; update();
     }).observe(closeCtas);
+  }
+
+  /* ---------- Motion (only when html.anim is set: visitor allows motion) ---------- */
+  var root = document.documentElement;
+  if (root.classList.contains("anim")) {
+    var counters = document.querySelectorAll(".ledger [data-count]");
+    var stamp = document.querySelector(".v-stamp");
+    var total = stamp && stamp.closest(".cell--total");
+    var shineBtn = document.querySelector(".paths .go--orange");
+    counters.forEach(function (el) { el.textContent = "$0.00"; });
+
+    var countUp = function (el, to, ms) {
+      var t0 = null;
+      var step = function (t) {
+        if (!t0) t0 = t;
+        var p = Math.min((t - t0) / ms, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = "$" + (to * e).toFixed(2);
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    var playHero = function () {
+      root.classList.add("hero-in");
+      setTimeout(function () { counters.forEach(function (el) { countUp(el, +el.getAttribute("data-count"), 650); }); }, 500);
+      setTimeout(function () {
+        if (stamp) stamp.classList.add("is-stamped");
+        if (total) { total.classList.add("flash"); setTimeout(function () { total.classList.remove("flash"); }, 400); }
+      }, 1200);
+      setTimeout(function () { if (shineBtn) shineBtn.classList.add("shine"); }, 1700);
+    };
+
+    // Wait until PageSense has revealed the page (it hides <body> while it loads), then play once.
+    var started = false;
+    var tryStart = function () {
+      if (started) return;
+      if (document.getElementById("zps-page-screen")) { requestAnimationFrame(tryStart); return; }
+      started = true;
+      requestAnimationFrame(playHero);
+    };
+    tryStart();
+    setTimeout(function () { if (!started) { started = true; playHero(); } }, 11000);
+
+    // Scroll-triggered: comparison bars and closing headline, once each.
+    var once = document.querySelectorAll(".bars-card, .close");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.35 });
+      once.forEach(function (el) { io.observe(el); });
+    } else {
+      once.forEach(function (el) { el.classList.add("in"); });
+    }
   }
 })();

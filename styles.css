@@ -312,3 +312,89 @@ h1,h2,h3,p,ol,ul,dl,dd{margin:0}
   html{scroll-behavior:auto}
   *,*::before,*::after{transition:none !important}
 }
+
+/* =========================================================
+   MOTION
+   All motion is gated by html.anim (added only when the visitor
+   has not asked for reduced motion). Without it the page is static.
+   ========================================================= */
+.ln{display:block;overflow:hidden;padding-bottom:.04em;margin-bottom:-.04em}
+.ln > span{display:block}
+
+/* Buttons: hover lift, press down */
+.go{transition:transform .15s ease,box-shadow .15s ease,filter .15s ease}
+@media (hover:hover){
+  .go:hover{transform:skewX(var(--skew)) translateY(-2px);filter:brightness(1.05)}
+  .go--orange:hover{box-shadow:0 7px 0 var(--orange-edge),0 14px 26px rgba(244,122,31,.28)}
+  .go--white:hover{box-shadow:0 7px 0 #8DA897,0 14px 26px rgba(0,0,0,.18)}
+  .go--green:hover{box-shadow:0 7px 0 var(--green-edge),0 14px 26px rgba(19,122,10,.28)}
+}
+.go:active{transform:skewX(var(--skew)) translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.35)}
+.key{transition:background .15s,border-color .15s,color .15s,transform .12s}
+.key:active{transform:skewX(var(--skew)) translateY(2px)}
+
+/* ---------- Hero load sequence ---------- */
+.anim .hero::before,.anim .hero::after{opacity:0;translate:120px 0}
+.anim .frame{clip-path:inset(0 0 100% 0)}
+.anim .frame img{scale:1.08}
+.anim .hero h1 .ln > span{transform:translateY(105%)}
+.anim .lede,.anim .ledger,.anim .ledger-note,.anim .paths,.anim .hero-fine{opacity:0;translate:0 14px}
+
+.anim.hero-in .hero::before,.anim.hero-in .hero::after{opacity:1;translate:0 0;transition:opacity .5s ease,translate .8s cubic-bezier(.2,.8,.2,1)}
+.anim.hero-in .hero::after{transition-delay:.08s}
+.anim.hero-in .frame{clip-path:inset(0 0 0 0);transition:clip-path .9s cubic-bezier(.65,0,.35,1) .15s}
+.anim.hero-in .frame img{scale:1;transition:scale 1.4s cubic-bezier(.2,.8,.2,1) .15s}
+.anim.hero-in .hero h1 .ln > span{transform:none;transition:transform .7s cubic-bezier(.2,.8,.2,1) .1s}
+.anim.hero-in .hero h1 .ln + .ln > span{transition-delay:.2s}
+.anim.hero-in .lede,.anim.hero-in .ledger,.anim.hero-in .ledger-note,.anim.hero-in .paths,.anim.hero-in .hero-fine{opacity:1;translate:0 0;transition:opacity .5s ease,translate .6s cubic-bezier(.2,.8,.2,1)}
+.anim.hero-in .lede{transition-delay:.35s}
+.anim.hero-in .ledger{transition-delay:.45s}
+.anim.hero-in .ledger-note{transition-delay:.55s}
+.anim.hero-in .paths{transition-delay:.6s}
+.anim.hero-in .hero-fine{transition-delay:.7s}
+
+/* the $1.00 stamps in after the count-up */
+.anim .v-stamp{display:inline-block;opacity:0;scale:1.6}
+.anim .v-stamp.is-stamped{opacity:1;scale:1;transition:opacity .15s ease,scale .45s cubic-bezier(.3,1.6,.5,1)}
+.cell--total{transition:background .4s ease}
+.cell--total.flash{background:#1c1c1c}
+
+/* one shine across the primary button */
+.paths .go--orange{position:relative;overflow:hidden}
+.paths .go--orange::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);pointer-events:none;opacity:0}
+.anim .paths .go--orange.shine::after{opacity:1;left:130%;transition:left .9s ease-in-out,opacity .2s}
+
+/* ---------- Scroll: comparison bars ---------- */
+.anim .bar-fill{scale:0 1;transform-origin:left center}
+.anim .bars-card.in .bar-fill{scale:1 1;transition:scale 1.1s cubic-bezier(.2,.8,.2,1)}
+.anim .bars-card.in .bar--go .bar-fill{transition-delay:.5s;transition-duration:.5s}
+.anim .keep span{display:inline-block}
+.anim .bars-card.in .keep span{animation:pop .45s cubic-bezier(.3,1.6,.5,1) 1.3s both}
+@keyframes pop{from{scale:.6;opacity:0}to{scale:1;opacity:1}}
+
+/* ---------- Scroll: closing headline ---------- */
+.anim .close-line .ln > span{transform:translateY(105%)}
+.anim .close.in .close-line .ln > span{transform:none;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.anim .close.in .close-line .ln + .ln > span{transition-delay:.15s}
+
+/* ---------- Payday answer ---------- */
+.anim .answer.show{animation:drop .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes drop{from{opacity:0;translate:0 -8px}to{opacity:1;translate:0 0}}
+.anim .answer.show .figure{display:inline-block;animation:pop .45s cubic-bezier(.3,1.6,.5,1) .15s both}
+
+/* ---------- FAQ: smooth open (supported browsers; others open instantly) ---------- */
+@supports (interpolate-size:allow-keywords){
+  .faq{interpolate-size:allow-keywords}
+  .faq details::details-content{block-size:0;overflow:hidden;transition:block-size .3s ease,content-visibility .3s allow-discrete}
+  .faq details[open]::details-content{block-size:auto}
+}
+.faq summary{transition:color .15s}
+@media (hover:hover){.faq summary:hover{color:var(--green)}}
+
+.fallback .v-stamp{opacity:1;scale:1}
+.fallback .bar-fill{scale:1 1}
+.fallback .close-line .ln > span{transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .go:hover,.go:active,.key:active{transform:skewX(var(--skew))}
+}
