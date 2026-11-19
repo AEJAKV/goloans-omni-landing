@@ -38,6 +38,7 @@ addEventListener("load",function(){setTimeout(function(){if(!r.classList.contain
   <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M19 21V10M9 21V10M15 21V10M2 10l10-6 10 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-form" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></g></symbol>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
@@ -70,24 +71,27 @@ addEventListener("load",function(){setTimeout(function(){if(!r.classList.contain
           <div class="path path--ibv">
             <a class="path-head" href="https://onyx.goloans.ca/clients/inverite/add/" data-cta="ibv" data-loc="hero-card" tabindex="-1" aria-hidden="true">
               <span class="path-icon path-icon--ibv"><svg aria-hidden="true"><use href="#i-bank"/></svg></span>
-              <span><strong>I already applied</strong><small>Verify your bank to finish</small></span>
+              <span><strong>Already applied?</strong><small>Verify your bank to finish</small></span>
             </a>
             <a class="go go--orange" data-cta="ibv" data-loc="hero" href="https://onyx.goloans.ca/clients/inverite/add/">
               <span class="go-in">
                 <svg class="go-icon" aria-hidden="true"><use href="#i-bank"/></svg>
                 <span class="go-txt"><span class="d">Yes, verify my bank</span><span class="m">Verify my bank</span><small class="d">Connect your bank to finish</small></span>
+                <svg class="go-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
               </span>
             </a>
           </div>
+          <div class="paths-or" aria-hidden="true"><span>or</span></div>
           <div class="path path--new">
             <a class="path-head" href="https://onyx.goloans.ca/clients/application/express/" data-cta="express" data-loc="hero-card" tabindex="-1" aria-hidden="true">
               <span class="path-icon path-icon--new"><svg aria-hidden="true"><use href="#i-form"/></svg></span>
-              <span><strong>I’m new to GoLoans</strong><small>Express form, about 2 minutes</small></span>
+              <span><strong>New application?</strong><small>Express form, about 2 minutes</small></span>
             </a>
             <a class="go go--white" data-cta="express" data-loc="hero" href="https://onyx.goloans.ca/clients/application/express/">
               <span class="go-in">
                 <svg class="go-icon" aria-hidden="true"><use href="#i-form"/></svg>
-                <span class="go-txt"><span class="d">No, start express form</span><span class="m">Start express form</span><small class="d">Takes about 2 minutes</small></span>
+                <span class="go-txt"><span class="d">No, start express form</span><span class="m">Express Sign Up</span><small class="d">Takes about 2 minutes</small></span>
+                <svg class="go-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
               </span>
             </a>
           </div>
